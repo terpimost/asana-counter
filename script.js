@@ -15,15 +15,13 @@ if (style.styleSheet) {
 
 head.appendChild(style);
 
-
-
 setInterval(function() {
    
     //Board/Kanban view 
     //number of tasks calculation and point pills sum calculation
     var viewType;
     var columns;
-
+    var rows;
     
     try {
         columns = Array.from(document.getElementsByClassName("SortableList-itemContainer SortableList-itemContainer SortableList-itemContainer--row")[0].children);
@@ -31,18 +29,22 @@ setInterval(function() {
     } catch (error) {
         viewType = 'list';
     }
-    
+
+    var pSum = 0;
+    var tSum = 0;
+    var totalTasksCounter=0;
+    var totalPointsCounter=0;
+    var totalLabelElement;
 
     if (viewType === 'board') { //we are in the board view
-        var pSum = 0;
-        var tSum = 0;
+        pSum = 0;
+        tSum = 0;
         var boardPSum=0;
         var boardTSum=0;
         var sumCounter;
         var taskCounter;
-        var totalTasksCounter=0;
-        var totalPointsCounter=0;
-        var totalLabelElement;
+        totalTasksCounter=0;
+        totalPointsCounter=0;
         var boardHeaderRow;
 
         columns.forEach((column, columnN) => {
@@ -131,10 +133,77 @@ setInterval(function() {
             totalLabelElement.className = "totalCounterLabel";
             boardHeaderRow.insertBefore(totalLabelElement, boardHeaderRow.firstChild);
         }
-        totalLabelElement.innerHTML = 'There are <b>'+boardTSum+'</b> tasks with <span class="smallPill">'+boardPSum+'</span> points';
+        totalLabelElement.innerHTML = 'There are <b>'+boardTSum+'</b> loaded tasks with <span class="smallPill">'+boardPSum+'</span> points';
 
     } else if(viewType === 'list'){ //we are in the list view
-      console.log('we are in the list view');
+      
+        var listHeaderElement = document.getElementsByClassName("GridHeader")[0];
+        totalLabelElement=document.getElementById("listTotalCounter");
+        if (totalLabelElement) {
+            //
+        }
+        else{
+            totalLabelElement = document.createElement('span');
+            totalLabelElement.id = "listTotalCounter";
+            totalLabelElement.className = "totalCounterLabel";
+            totalLabelElement.style.cssText = "font-size:11;";
+            listHeaderElement.insertBefore(totalLabelElement, listHeaderElement.lastChild);
+        }
+        
+        
+        try {
+            rows = [...document.getElementsByClassName("TaskList")[0].children];
+        } catch (error) {
+            return;
+        }
+        pSum=0;
+        tSum=0;
+        var sectoinSum=0;
+        var rowElement;
+        var sectoinNameElement;
+        rows.forEach((row, rowN) => {
+            rowElement=row.getElementsByClassName('TaskRow')[0];
+            if(rowElement) //it is a task
+            {
+                tSum++;
+                var rightRowElements=rowElement.getElementsByClassName('ItemRowTwoColumnStructure-right')[0];
+                var customProps=[...rightRowElements.getElementsByClassName('CustomPropertyEditablePreviewContainer')];
+                customProps.forEach((property, propertyN) => {
+                    var tempB=property.children[0].getElementsByClassName("Pill--colorCoolGray Pill Pill--small");
+                    if (tempB.length !== 0) {
+                        var p = parseInt(tempB[0].textContent);
+                        //console.log('points=',p);
+                        pSum+=p;
+                        sectoinSum+=p;
+                    }
+                });
+                if(sectoinNameElement){//update section sum
+
+                }
+            }
+            else{//section or milestone but not the task
+                //console.log("section sum=",sectoinSum);
+                if(sectoinNameElement){
+                    console.log(sectoinSum+"-",sectoinNameElement.textContent);
+                }
+
+                rowElement=row.getElementsByClassName('SectionRow')[0];
+                if(rowElement) //it is a section
+                {
+                    sectoinNameElement=rowElement.getElementsByClassName('SectionRow-sectionName')[0].children[0];
+                }
+                
+                sectoinSum=0;
+            }
+            
+            if(rowN===rows.length-1){
+                if(sectoinNameElement){
+                    console.log(sectoinSum+"-",sectoinNameElement.textContent);
+                }
+            }
+        });
+
+        totalLabelElement.innerHTML = 'There are <b>'+tSum+'</b> loaded tasks with <span class="smallPill">'+pSum+'</span> points';
     }
 
 
