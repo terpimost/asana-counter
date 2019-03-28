@@ -92,10 +92,7 @@ setInterval(function() {
                             taskCounter.innerHTML = tSum + ' tasks';
                         }
                     }
-
                 }
-
-                
 
                 if (isNaN(pSum) || pSum == 0) {
                     sumCounter = document.getElementById("columnSumCounter" + columnN);
@@ -117,7 +114,6 @@ setInterval(function() {
                         sumCounter.innerHTML = pSum;
                     }
                 }
-
                 boardTSum+=tSum;
                 boardPSum+=pSum;
             }
@@ -174,7 +170,6 @@ setInterval(function() {
                     var tempB=property.children[0].getElementsByClassName("Pill--colorCoolGray Pill Pill--small");
                     if (tempB.length !== 0) {
                         var p = parseInt(tempB[0].textContent);
-                        //console.log('points=',p);
                         pSum+=p;
                         sectoinSum+=p;
                         sectionTasks++;
@@ -182,13 +177,8 @@ setInterval(function() {
                 });
             }
             else{//section or milestone but not the task
-                // if(sectoinNameElement){
-                //    console.log(sectoinSum+"-",sectoinNameElement.textContent);
-                //    // 
-                // }
                 if(taskCounter && sectoinSum>0) taskCounter.innerHTML =sectionTasks+' tasks <span class="smallPill"><b>'+sectoinSum+'</b></span>';
                 
-
                 rowElement=row.getElementsByClassName('SectionRow')[0];
                 if(rowElement) //it is a section
                 {
@@ -199,8 +189,8 @@ setInterval(function() {
                         //there is already an element
                     }else{
                         taskCounter = document.createElement('div');
-                        taskCounter.className = "totalCounterLabel";
-                        taskCounter.style.cssText = "font-size:11; padding-right:0;";
+                       // taskCounter.className = "totalCounterLabel";
+                        taskCounter.style.cssText = "font-size:11; padding-right:0; margin-right: -13px;";
                         taskCounter.id = "rowTaskCounter"+rowN;
                         rowElement.appendChild(taskCounter);
                     }
@@ -209,17 +199,11 @@ setInterval(function() {
             }
             
             if(rowN===rows.length-1){//if its a last item of the list lets update section sum
-                // if(sectoinNameElement){
-                    //console.log(sectoinSum+"-",sectoinNameElement.textContent);
-                    if(taskCounter && sectoinSum>0) taskCounter.innerHTML =sectionTasks+' tasks <span class="smallPill"><b>'+sectoinSum+'</b></span>';
-                // }
+                if(taskCounter && sectoinSum>0) taskCounter.innerHTML =sectionTasks+' tasks <span class="smallPill"><b>'+sectoinSum+'</b></span>';
             }
         });
 
         totalLabelElement.innerHTML = 'There are <b>'+tSum+'</b> loaded tasks with <span class="smallPill">'+pSum+'</span> points';
     }
-
-    //layout textarea padding-right: 200px - 
-    //new div after that position absolute with top=0, right=0, tune styles
 
 }, 2000);
