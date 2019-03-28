@@ -1,2 +1,8 @@
-# asana-counter
+# Asana counter
 Chrome Extension to calculate tasks and points in Asana
+## How to install
+1. Install Cutom Java Script extention https://chrome.google.com/webstore/detail/custom-javascript-for-web/poakhlngfciodnhlhhgnaaelnpjljija
+2. Open Asana in a tab
+3. Open Cutom Java Script extention
+4. Paste all code from script.js and click Save button
+5. You should see counters on top of columns in a board view of Asana
