@@ -35,14 +35,15 @@ setInterval(function() {
     var totalTasksCounter=0;
     var totalPointsCounter=0;
     var totalLabelElement;
+    var sumCounter;
+    var taskCounter;
 
     if (viewType === 'board') { //we are in the board view
         pSum = 0;
         tSum = 0;
         var boardPSum=0;
         var boardTSum=0;
-        var sumCounter;
-        var taskCounter;
+        
         totalTasksCounter=0;
         totalPointsCounter=0;
         var boardHeaderRow;
@@ -146,7 +147,7 @@ setInterval(function() {
             totalLabelElement = document.createElement('span');
             totalLabelElement.id = "listTotalCounter";
             totalLabelElement.className = "totalCounterLabel";
-            totalLabelElement.style.cssText = "font-size:11;";
+            totalLabelElement.style.cssText = "font-size:11; padding-right:0;";
             listHeaderElement.insertBefore(totalLabelElement, listHeaderElement.lastChild);
         }
         
@@ -159,6 +160,7 @@ setInterval(function() {
         pSum=0;
         tSum=0;
         var sectoinSum=0;
+        var sectionTasks=0;
         var rowElement;
         var sectoinNameElement;
         rows.forEach((row, rowN) => {
@@ -175,48 +177,49 @@ setInterval(function() {
                         //console.log('points=',p);
                         pSum+=p;
                         sectoinSum+=p;
+                        sectionTasks++;
                     }
                 });
-                if(sectoinNameElement){//update section sum
-
-                }
             }
             else{//section or milestone but not the task
-                //console.log("section sum=",sectoinSum);
-                if(sectoinNameElement){
-                    console.log(sectoinSum+"-",sectoinNameElement.textContent);
-                }
+                // if(sectoinNameElement){
+                //    console.log(sectoinSum+"-",sectoinNameElement.textContent);
+                //    // 
+                // }
+                if(taskCounter && sectoinSum>0) taskCounter.innerHTML =sectionTasks+' tasks <span class="smallPill"><b>'+sectoinSum+'</b></span>';
+                
 
                 rowElement=row.getElementsByClassName('SectionRow')[0];
                 if(rowElement) //it is a section
                 {
                     sectoinNameElement=rowElement.getElementsByClassName('SectionRow-sectionName')[0].children[0];
+                    var t=document.getElementById("rowTaskCounter"+rowN);
+                    if(t)
+                    {
+                        //there is already an element
+                    }else{
+                        taskCounter = document.createElement('div');
+                        taskCounter.className = "totalCounterLabel";
+                        taskCounter.style.cssText = "font-size:11; padding-right:0;";
+                        taskCounter.id = "rowTaskCounter"+rowN;
+                        rowElement.appendChild(taskCounter);
+                    }
                 }
-                
                 sectoinSum=0;
             }
             
-            if(rowN===rows.length-1){
-                if(sectoinNameElement){
-                    console.log(sectoinSum+"-",sectoinNameElement.textContent);
-                }
+            if(rowN===rows.length-1){//if its a last item of the list lets update section sum
+                // if(sectoinNameElement){
+                    //console.log(sectoinSum+"-",sectoinNameElement.textContent);
+                    if(taskCounter && sectoinSum>0) taskCounter.innerHTML =sectionTasks+' tasks <span class="smallPill"><b>'+sectoinSum+'</b></span>';
+                // }
             }
         });
 
         totalLabelElement.innerHTML = 'There are <b>'+tSum+'</b> loaded tasks with <span class="smallPill">'+pSum+'</span> points';
     }
 
-
-    //List view 
-    //number of tasks calculation and point pills sum calculation
-    //Go find the div with class = TaskList
-    //for each child which is class="dropTargetRow" do this: rmember number of the row as var rowNumber=0;
-    //get child which is class="TaskRow" or class="SectionRow"
-    //if it is class="SectionRow" rembember that dom element and start calulating regular rows until the next SectionRow, rowNumberUnderSection=-1, tSum=0, pSum = 0
-    //if it is class='TaskRow' rowNumberUnderSection++, tSum++, pSum=pSum+ (find the drop and get number of points in it)
-    //and update SectionRow dom element
-
-    // layout textarea padding-right: 200px - 
+    //layout textarea padding-right: 200px - 
     //new div after that position absolute with top=0, right=0, tune styles
 
 }, 2000);
