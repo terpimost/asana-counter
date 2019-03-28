@@ -39,8 +39,7 @@ setInterval(function() {
     var taskCounter;
 
     if (viewType === 'board') { //we are in the board view
-        pSum = 0;
-        tSum = 0;
+        
         var boardPSum=0;
         var boardTSum=0;
         
@@ -49,6 +48,8 @@ setInterval(function() {
         var boardHeaderRow;
 
         columns.forEach((column, columnN) => {
+            pSum = 0;
+            tSum = 0;
             const colName = column.getElementsByClassName("BoardColumnHeaderTitle BoardColumnHeader-name")[0];
             if (colName) {
 
