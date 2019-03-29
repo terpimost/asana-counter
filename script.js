@@ -1,3 +1,5 @@
+console.log("chrome extention");
+
 var css = '.columnSumCounterPill {background-color: #8da3a6;color: #fff;border-radius: 8px;font-size: 11px;height: 16px;line-height: 16px;padding: 0 8px;margin-left: 8px;}'+
 '.smallPill {background-color: #8da3a6;color: #fff;border-radius: 8px;font-size: 11px;height: 18px;line-height: 18px;padding: 1px 6px 2px 6px;}'+
 '.columnTaskCounter {padding-left:5px}'+
@@ -135,6 +137,9 @@ setInterval(function() {
 
     } else if(viewType === 'list'){ //we are in the list view
         var listHeaderElement = document.getElementsByClassName("GridHeader")[0];
+        if(listHeaderElement=== 'undefined'){
+            return;
+        }
         totalLabelElement=document.getElementById("listTotalCounter");
         if (totalLabelElement) {
             //
@@ -144,7 +149,11 @@ setInterval(function() {
             totalLabelElement.id = "listTotalCounter";
             totalLabelElement.className = "totalCounterLabel";
             totalLabelElement.style.cssText = "font-size:11; padding-right:0;";
-            listHeaderElement.insertBefore(totalLabelElement, listHeaderElement.lastChild);
+            try {
+                listHeaderElement.insertBefore(totalLabelElement, listHeaderElement.lastChild);
+            }
+            catch(e){
+            }
         }
         
         
