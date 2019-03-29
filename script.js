@@ -1,5 +1,5 @@
 var css = '.columnSumCounterPill {background-color: #8da3a6;color: #fff;border-radius: 8px;font-size: 11px;height: 16px;line-height: 16px;padding: 0 8px;margin-left: 8px;}'+
-'.smallPill {background-color: #8da3a6;color: #fff;border-radius: 8px;font-size: 11px;height: 18px;line-height: 18px;padding: 1px 5px 2px 5px;}'+
+'.smallPill {background-color: #8da3a6;color: #fff;border-radius: 8px;font-size: 11px;height: 18px;line-height: 18px;padding: 1px 6px 2px 6px;}'+
 '.columnTaskCounter {padding-left:5px}'+
 '.totalCounterLabel {line-height:24px; padding-right:10px; font-size:12px; color:#848f99; }',
     head = document.head || document.getElementsByTagName('head')[0],
@@ -134,7 +134,6 @@ setInterval(function() {
         totalLabelElement.innerHTML = 'There are <b>'+boardTSum+'</b> loaded tasks with <span class="smallPill">'+boardPSum+'</span> points';
 
     } else if(viewType === 'list'){ //we are in the list view
-      
         var listHeaderElement = document.getElementsByClassName("GridHeader")[0];
         totalLabelElement=document.getElementById("listTotalCounter");
         if (totalLabelElement) {
@@ -178,20 +177,20 @@ setInterval(function() {
                 });
             }
             else{//section or milestone but not the task
-                if(taskCounter && sectoinSum>0) taskCounter.innerHTML =sectionTasks+' tasks <span class="smallPill"><b>'+sectoinSum+'</b></span>';
+                if(taskCounter && sectoinSum>0) taskCounter.innerHTML = sectionTasks+' tasks <span class="smallPill"><b>'+sectoinSum+'</b></span>';
                 
                 rowElement=row.getElementsByClassName('SectionRow')[0];
                 if(rowElement) //it is a section
                 {
                     sectoinNameElement=rowElement.getElementsByClassName('SectionRow-sectionName')[0].children[0];
-                    var t=document.getElementById("rowTaskCounter"+rowN);
-                    if(t)
+                    taskCounter=document.getElementById("rowTaskCounter"+rowN);
+                    if(taskCounter)
                     {
                         //there is already an element
                     }else{
                         taskCounter = document.createElement('div');
                        // taskCounter.className = "totalCounterLabel";
-                        taskCounter.style.cssText = "font-size:11; padding-right:0; margin-right: -13px;";
+                        taskCounter.style.cssText = "font-size:11; padding-right:0; margin-right: -13px; border-bottom:solid 1px; margin-bottom:-2px;";
                         taskCounter.id = "rowTaskCounter"+rowN;
                         rowElement.appendChild(taskCounter);
                     }
