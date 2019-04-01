@@ -1,6 +1,6 @@
 {
     "manifest_version":2,
-    "name": "Asana Counter Extention",
+    "name": "Asana Counter Extension",
     "description": "Asana tasks and points counter. Points must to be a custom Asana drop-down property with numbers only and with grey color.",
     "icons": {"128": "icon-128.png" },
     "browser_action": {
@@ -12,7 +12,7 @@
         },
         "default_title": "Works on Asana website"
       },
-    "version": "0.1",
+    "version": "0.2",
     "content_scripts":[
         {
             "matches": [
