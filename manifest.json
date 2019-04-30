@@ -10,9 +10,9 @@
           "32": "icon-32.png"
              
         },
-        "default_title": "Works on Asana website"
+        "default_title": "Works on Asana app"
       },
-    "version": "0.3",
+    "version": "0.4",
     "content_scripts":[
         {
             "matches": [

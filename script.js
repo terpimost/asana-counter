@@ -186,6 +186,7 @@ setInterval(function () {
                 {
                     sectoinNameElement = rowElement.getElementsByClassName('SectionRow-sectionName')[0].children[0];
                     taskCounter = document.getElementById("rowTaskCounter" + rowN);
+                    //taskCounter = rowElement.getElementsByClassName('rowTaskCounter')[0];
                     if (taskCounter) {
                         //there is already an element
                     } else {
@@ -193,10 +194,12 @@ setInterval(function () {
                         // taskCounter.className = "totalCounterLabel";
                         taskCounter.style.cssText = "font-size:11; padding-right:0; margin-right: -13px; border-bottom:solid 1px; margin-bottom:-2px;";
                         taskCounter.id = "rowTaskCounter" + rowN;
+                        taskCounter.className = "rowTaskCounter";
                         rowElement.appendChild(taskCounter);
                     }
                 }
                 sectoinSum = 0;
+                sectionTasks = 0;
             }
 
             if (rowN === rows.length - 1) { //if its a last item of the list lets update section sum
