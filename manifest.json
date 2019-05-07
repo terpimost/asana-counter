@@ -12,7 +12,7 @@
         },
         "default_title": "Works on Asana app"
       },
-    "version": "0.4",
+    "version": "0.5",
     "content_scripts":[
         {
             "matches": [

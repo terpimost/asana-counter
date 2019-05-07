@@ -130,10 +130,10 @@ setInterval(function () {
             totalLabelElement.className = "totalCounterLabel";
             boardHeaderRow.insertBefore(totalLabelElement, boardHeaderRow.firstChild);
         }
-        totalLabelElement.innerHTML = 'There are <b>' + boardTSum + '</b> loaded tasks with <span class="smallPill">' + boardPSum + '</span> points';
+        totalLabelElement.innerHTML = '<b>' + boardTSum + '</b> loaded tasks with <span class="smallPill">' + boardPSum + '</span> points';
 
     } else if (viewType === 'list') { //we are in the list view
-        var listHeaderElement = document.getElementsByClassName("GridHeader")[0];
+        var listHeaderElement = document.getElementsByClassName("GridHeaderStructure-right")[0];
         if (listHeaderElement === 'undefined') {
             return;
         }
@@ -144,9 +144,9 @@ setInterval(function () {
             totalLabelElement = document.createElement('span');
             totalLabelElement.id = "listTotalCounter";
             totalLabelElement.className = "totalCounterLabel";
-            totalLabelElement.style.cssText = "font-size:11; padding-right:0;";
+            totalLabelElement.style.cssText = "font-size:11; padding-right:0;line-height: 12px;";
             try {
-                listHeaderElement.insertBefore(totalLabelElement, listHeaderElement.lastChild);
+                listHeaderElement.insertBefore(totalLabelElement, listHeaderElement.firstChild);
             } catch (e) {}
         }
 
@@ -185,14 +185,14 @@ setInterval(function () {
                 if (rowElement) //it is a section
                 {
                     sectoinNameElement = rowElement.getElementsByClassName('SectionRow-sectionName')[0].children[0];
-                    taskCounter = document.getElementById("rowTaskCounter" + rowN);
-                    //taskCounter = rowElement.getElementsByClassName('rowTaskCounter')[0];
+                    //taskCounter = document.getElementById("rowTaskCounter" + rowN);
+                    taskCounter = rowElement.getElementsByClassName('rowTaskCounter')[0];
                     if (taskCounter) {
                         //there is already an element
                     } else {
                         taskCounter = document.createElement('div');
                         // taskCounter.className = "totalCounterLabel";
-                        taskCounter.style.cssText = "font-size:11; padding-right:0; margin-right: -13px; border-bottom:solid 1px; margin-bottom:-2px;";
+                        taskCounter.style.cssText = "font-size:11; padding-right:0; margin-right: -13px; border-bottom:solid 1px; margin-bottom:-2px; padding-bottom: 1px;";
                         taskCounter.id = "rowTaskCounter" + rowN;
                         taskCounter.className = "rowTaskCounter";
                         rowElement.appendChild(taskCounter);
@@ -207,7 +207,7 @@ setInterval(function () {
             }
         });
 
-        totalLabelElement.innerHTML = 'There are <b>' + tSum + '</b> loaded tasks with <span class="smallPill">' + pSum + '</span> points';
+        totalLabelElement.innerHTML = '<b>' + tSum + '</b> loaded tasks with <span class="smallPill">' + pSum + '</span> points';
     }
 
 }, 2000);
