@@ -1,5 +1,8 @@
 # Asana counter
 Chrome Extension to calculate tasks and points in Asana
+Article about it https://www.boostlabs.com/improve-your-teams-agile-process-in-asana/
+
+Install bia Chrome store
 https://chrome.google.com/webstore/detail/asana-counter-extention/npbhpppmgfjodckhiomoicgjaakmklnl
 
 ## How to install to debug
