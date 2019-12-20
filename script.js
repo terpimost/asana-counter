@@ -17,7 +17,7 @@ head.appendChild(style);
 
 setInterval(function () {
 
-    //Board/Kanban view 
+    //Board/Kanban view
     //number of tasks calculation and point pills sum calculation
     var viewType;
     var columns;
@@ -53,7 +53,7 @@ setInterval(function () {
             const colName = column.getElementsByClassName("BoardColumnHeaderTitle BoardColumnHeader-name")[0];
             if (colName) {
 
-                var arr = Array.from(column.getElementsByClassName("BoardCardWithCustomProperties"));
+                var arr = Array.from(column.getElementsByClassName("BoardCard"));
                 arr.forEach((element, i) => {
                     tSum++;
                     const pointElems = element.getElementsByClassName("Pill--colorCoolGray Pill Pill--small");
