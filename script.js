@@ -173,9 +173,11 @@ setInterval(function () {
                     var tempB = property.children[0].getElementsByClassName("Pill--colorCoolGray Pill Pill--small");
                     if (tempB.length !== 0) {
                         var p = parseInt(tempB[0].textContent);
-                        pSum += p;
-                        sectoinSum += p;
-                        sectionTasks++;
+                        if (!isNaN(p)) {
+                            pSum += p;
+                            sectoinSum += p;
+                            sectionTasks++;
+                        }
                     }
                 });
             } else { //section or milestone but not the task
