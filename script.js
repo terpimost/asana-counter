@@ -120,7 +120,7 @@ setInterval(function () {
             }
         });
 
-        boardHeaderRow = document.getElementsByClassName("Board-header")[0];
+        boardHeaderRow = document.getElementsByClassName("PageToolbarStructure-rightChildren")[0];
         totalLabelElement = document.getElementById("boardTotalCounter");
         if (totalLabelElement) {
             //
