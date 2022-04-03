@@ -1,3 +1,5 @@
+# This project is no longer maintained. Instead use [StoryPoint for Asana](https://github.com/igtm/storypoint-for-asana-chrome-ext)
+
 # Asana counter
 Chrome Extension to calculate tasks and points in Asana
 Article about it https://www.boostlabs.com/improve-your-teams-agile-process-in-asana/
